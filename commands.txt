@@ -1,11 +1,9 @@
 conda install -c conda-forge opencv=3.4.3
 conta install jupyter
 conda update --all --yes
-
-
 RESOLVE THE ERROR "Solving environment: failed with initial frozen solve. Retrying with flexible solve":
-
 conda config --set channel_priority false
 conda install -c spyder-ide spyder-unittest
-
 conda install -c conda-forge dlib
+conda install matplotlib
+conda install seaborn

@@ -1,5 +1,5 @@
 conda install -c conda-forge opencv=3.4.3
-consta install jupyter
+conta install jupyter
 conda update --all --yes
 
 

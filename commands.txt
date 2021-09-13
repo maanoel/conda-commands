@@ -7,3 +7,5 @@ RESOLVE THE ERROR "Solving environment: failed with initial frozen solve. Retryi
 
 conda config --set channel_priority false
 conda install -c spyder-ide spyder-unittest
+
+conda install -c conda-forge dlib

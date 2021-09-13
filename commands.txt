@@ -1,3 +1,8 @@
 conda install -c conda-forge opencv=3.4.3
 consta install jupyter
 conda update --all --yes
+
+
+RESOLVE THE ERROR "Solving environment: failed with initial frozen solve. Retrying with flexible solve":
+
+conda config --set channel_priority false

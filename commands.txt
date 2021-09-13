@@ -6,3 +6,4 @@ conda update --all --yes
 RESOLVE THE ERROR "Solving environment: failed with initial frozen solve. Retrying with flexible solve":
 
 conda config --set channel_priority false
+conda install -c spyder-ide spyder-unittest

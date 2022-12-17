@@ -104,3 +104,57 @@ def main():
 
 if __name__ == '__main__':
   main()
+
+
+import nltk
+
+# Define a set of words that the AI should recognize
+words = []
+
+# Tokenize input sentence and extract relevant words
+def process_input(sentence):
+  tokens = nltk.word_tokenize(sentence)
+  relevant_words = [word for word in tokens if word in words]
+  return relevant_words
+
+# Respond to input using a simple classification algorithm
+def generate_response(input_words):
+  # If input is empty, return a random greeting
+  if not input_words:
+    return 'Hello!'
+  
+  # If input contains a greeting word, return a random greeting
+  greeting_words = ['hello', 'hi', 'greetings']
+  if any(word in greeting_words for word in input_words):
+    return 'Hello! How are you doing?'
+  
+  # If input contains a question word, return a random question
+  question_words = ['how', 'what', 'why']
+  if any(word in question_words for word in input_words):
+    return 'What would you like to know?'
+  
+  # If input contains a statement word, return a random statement
+  statement_words = ['I', 'am', 'doing', 'well', 'thank', 'you']
+  if any(word in statement_words for word in input_words):
+    return 'I am glad to hear that you are doing well. Thank you!'
+  
+  # Otherwise, return a random response
+  return 'Thank you for your input!'
+
+# Learn new words from input
+def learn_words(input_words):
+  for word in input_words:
+    if word not in words:
+      words.append(word)
+
+# Get user input and generate a response
+def main():
+  while True:
+    input_sentence = input('Enter a sentence: ')
+    input_words = process_input(input_sentence)
+    learn_words(input_words)
+    response = generate_response(input_words)
+    print(response)
+
+if __name__ == '__main__':
+  main()

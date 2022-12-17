@@ -158,3 +158,44 @@ def main():
 
 if __name__ == '__main__':
   main()
+
+import spacy
+import nltk
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+
+# Carregar o modelo de linguagem em português do spaCy
+nlp = spacy.load('pt_core_news_sm')
+
+# Define exemplos de frases de cumprimento, pergunta e afirmação
+exemplos_cumprimento = ['Olá!', 'Bom dia!', 'Oi!', 'Cumprimentos!']
+exemplos_pergunta = ['Como você está?', 'O que você gostaria de saber?', 'Por que você está perguntando isso?']
+exemplos_afirmacao = ['Eu estou bem, obrigado.', 'Estou bem, obrigado.', 'Estou muito bem, obrigado.']
+
+# Extrai as palavras das frases de exemplo e as combina em uma única lista
+palavras_exemplo = []
+for frase in exemplos_cumprimento + exemplos_pergunta + exemplos_afirmacao:
+  doc = nlp(frase)
+  palavras_exemplo.extend([token.text for token in doc])
+
+# Cria um vetorizador de palavras para contar as ocorrências de cada palavra nas frases de exemplo
+vetorizador = CountVectorizer()
+X = vetorizador.fit_transform(palavras_exemplo)
+
+# Define as categorias de cumprimento, pergunta e afirmação
+categorias = ['cumprimento', 'pergunta', 'afirmação']
+
+# Cria um classificador Naive Bayes com as frases de exemplo e suas respectivas categorias
+classificador = MultinomialNB()
+classificador.fit(X, categorias)
+
+# Tokeniza a frase de entrada e extrai as palavras relevantes
+def processar_entrada(frase):
+  doc = nlp(frase)
+  palavras_relevantes = [token.text for token in doc]
+  return palavras_relevantes
+
+# Classifica as palavras de entrada utilizando o classificador Naive Bayes treinado
+def classificar_palavras(palavras_entrada):
+  X_entrada = vetorizador.transform(palavras_entrada)
+  categoria

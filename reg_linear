@@ -41,3 +41,29 @@ w = fit(X, y)
 x_test = np.array([5, 6])
 y_pred = predict(x_test, w)
 print(y_pred)  # imprime a previsão do modelo para as amostras de entrada x_test
+
+import numpy as np
+from keras.models import Sequential
+from keras.layers import Dense
+
+# Generate dummy data
+x_train = np.random.random((1000, 20))
+y_train = np.random.randint(2, size=(1000, 1))
+x_test = np.random.random((100, 20))
+y_test = np.random.randint(2, size=(100, 1))
+
+# Build model
+model = Sequential()
+model.add(Dense(64, input_dim=20, activation='relu'))
+model.add(Dense(64, activation='relu'))
+model.add(Dense(1, activation='sigmoid'))
+
+# Compile model
+model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+# Train model
+model.fit(x_train, y_train, epochs=10, batch_size=128)
+
+# Evaluate model
+score = model.evaluate(x_test, y_test, batch_size=128)
+print(score)

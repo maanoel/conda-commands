@@ -1,0 +1,43 @@
+#A aprendizagem de máquina é uma técnica que permite que um modelo aprenda a realizar tarefas a partir de dados, sem que sejam explícitamente programados para realizar essas tarefas. Aqui está um exemplo de uma função de aprendizagem de máquina que utiliza o algoritmo de regressão linear simples para treinar um modelo de previsão de saída contínua a partir de um conjunto de entrada e saída:
+
+import numpy as np
+
+def fit(X, y):
+  # Inicializa os pesos w com valores aleatórios
+  w = np.random.randn(X.shape[1])
+
+  # Define a taxa de aprendizado
+  eta = 0.01
+
+  # Executa o algoritmo de treinamento por 1000 iterações
+  for i in range(1000):
+    # Calcula a saída prevista do modelo para as amostras de entrada X
+    y_pred = X.dot(w)
+
+    # Calcula o erro entre a saída prevista e a saída real
+    error = y_pred - y
+
+    # Atualiza os pesos w usando o gradiente descendente
+    w -= eta * (X.T.dot(error) / len(X))
+
+  # Retorna os pesos treinados
+  return w
+
+def predict(X, w):
+  # Calcula a saída prevista do modelo para as amostras de entrada X
+  y_pred = X.dot(w)
+  return y_pred
+
+#Para usar essa função, basta fornecer um conjunto de entrada X e saída y de treinamento e chamar a função fit para treinar o modelo. Em seguida, você pode usar a função predict para realizar previsões usando o modelo treinado.
+
+# Suponha que temos um conjunto de amostras de entrada X e saída y
+X = np.array([[1, 2], [2, 3], [3, 4], [4, 5]])
+y = np.array([5, 7, 9, 11])
+
+# Treinamos o modelo usando o conjunto de treinamento
+w = fit(X, y)
+
+# Realizamos uma previsão usando o modelo treinado
+x_test = np.array([5, 6])
+y_pred = predict(x_test, w)
+print(y_pred)  # imprime a previsão do modelo para as amostras de entrada x_test

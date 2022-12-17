@@ -1,0 +1,20 @@
+import numpy as np
+
+
+def sigmoid(x):
+  return 1 / (1 + np.exp(-x))
+
+def predict(inputs, weights):
+  hidden_layer_inputs = np.dot(inputs, weights[0])
+  hidden_layer_outputs = sigmoid(hidden_layer_inputs)
+  output_layer_inputs = np.dot(hidden_layer_outputs, weights[1])
+  return sigmoid(output_layer_inputs)
+
+inputs = np.array([[0, 0, 1], [1, 1, 1], [1, 0, 1], [0, 1, 1]])
+weights = [
+  np.array([[0.5, 0.5, 0.5], [0.5, 0.5, 0.5], [0.5, 0.5, 0.5]]),
+  np.array([0.5, 0.5, 0.5])
+]
+
+predictions = predict(inputs, weights)
+print(predictions)

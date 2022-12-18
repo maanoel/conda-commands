@@ -7,3 +7,10 @@ conda install -c spyder-ide spyder-unittest
 conda install -c conda-forge dlib
 conda install matplotlib
 conda install seaborn
+
+
+import cv2
+import numpy as np
+
+# Carrega a imagem
+image = cv2.imread('image.jpg')

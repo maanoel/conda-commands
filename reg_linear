@@ -199,3 +199,37 @@ def processar_entrada(frase):
 def classificar_palavras(palavras_entrada):
   X_entrada = vetorizador.transform(palavras_entrada)
   categoria
+
+
+
+#webcrawling
+
+
+import requests, bs4
+
+import BeautifulSoup
+
+def crawl(url):
+  # Faz uma requisição HTTP para a URL especificada
+  response = requests.get(url)
+
+  # Verifica se a requisição foi bem-sucedida
+  if response.status_code == 200:
+    # Obtém o conteúdo da página
+    html_content = response.text
+
+    # Cria um objeto BeautifulSoup a partir do conteúdo da página
+    soup = BeautifulSoup(html_content, 'html.parser')
+
+    # Obtém todos os links da página
+    links = soup.find_all('a')
+
+    # Itera pelos links e imprime o texto e a URL
+    for link in links:
+      print(link.text, link['href'])
+
+      # Chama a função crawl() recursivamente para seguir os links
+      crawl(link['href'])
+
+# Inicia o crawl a partir de uma URL específica
+crawl('https://www.example.com')
